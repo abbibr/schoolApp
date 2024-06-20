@@ -56,29 +56,39 @@ class MonthlyFeeController extends Controller
         $html['thsource'] .= '<th>Action</th>';
 
         foreach ($assign_students as $key => $value) {
-            $fee_category_amount = FeeCategoryAmount::where('fee_category_id', 4)
+            $fee_category_amount = FeeCategoryAmount::where('fee_category_id', 2)
                 ->where('student_class_id', $class_id)
                 ->first();
 
-                $html[$key]['tdsource'] = '<td>' . ($key + 1) . '</td>';
-                $html[$key]['tdsource'] .= '<td>' . $value->student->id_no . '</td>';
-                $html[$key]['tdsource'] .= '<td>' . $value->student->name . '</td>';
-                $html[$key]['tdsource'] .= '<td>' . $value->roll . '</td>';
-                $html[$key]['tdsource'] .= '<td>' . $fee_category_amount->amount . '</td>';
-                $html[$key]['tdsource'] .= '<td>' . $value->discount[0]->discount . '%' . '</td>';
-    
-                $originalfee = $fee_category_amount->amount;
-                $discount = $value->discount[0]->discount;
-                $discounttablefee = $discount / 100 * $originalfee;
-                $finalfee = (float) $originalfee - (float) $discounttablefee;
-    
-                $html[$key]['tdsource'] .= '<td>' . $finalfee . '</td>';
-                $html[$key]['tdsource'] .= '<td>';
-                $html[$key]['tdsource'] .= '<a class="btn btn-sm btn-success" title="PaySlip" target="_blanks" href="'.route("student.registration.fee.payslip").'?class_id='.$value->class_id.'&student_id='.$value->student_id.'">Exam Fee</a>';
-                $html[$key]['tdsource'] .= '</td>';
+            if (empty($fee_category_amount->student_class_id)) {
+                $html['thsource'] = '<h3 style="color: #CC4A93;">We don`t have any student in this category!</h3>';
+                return response()->json(@$html);
+            }
+
+            $html[$key]['tdsource'] = '<td>' . ($key + 1) . '</td>';
+            $html[$key]['tdsource'] .= '<td>' . $value->student->id_no . '</td>';
+            $html[$key]['tdsource'] .= '<td>' . $value->student->name . '</td>';
+            $html[$key]['tdsource'] .= '<td>' . $value->roll . '</td>';
+            $html[$key]['tdsource'] .= '<td>' . $fee_category_amount->amount . '</td>';
+            $html[$key]['tdsource'] .= '<td>' . $value->discount[0]->discount . '%' . '</td>';
+
+            $originalfee = $fee_category_amount->amount;
+            $discount = $value->discount[0]->discount;
+            $discounttablefee = $discount / 100 * $originalfee;
+            $finalfee = (float) $originalfee - (float) $discounttablefee;
+
+            $html[$key]['tdsource'] .= '<td>' . $finalfee . '</td>';
+            $html[$key]['tdsource'] .= '<td>';
+            $html[$key]['tdsource'] .= '<a class="btn btn-sm btn-success" title="PaySlip" target="_blanks" href="' . route("exam.pdf.generate") . '?class_id=' . $value->class_id . '&month=' . $request->month . '&student_id=' . $value->student_id . '">Exam Fee</a>';
+            $html[$key]['tdsource'] .= '</td>';
         }
 
         return response()->json(@$html);
+    }
+
+    public function pdfGenerate(Request $request)
+    {
+        return $request->student_id;
     }
 }
 

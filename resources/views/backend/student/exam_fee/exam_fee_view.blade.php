@@ -128,6 +128,7 @@
            $.ajax({
             url: "{{ route('exam.fee.generate')}}",
             type: "get",
+            dataType: 'json',
             data: {
                 'year_id':year_id,
                 'class_id':class_id,
