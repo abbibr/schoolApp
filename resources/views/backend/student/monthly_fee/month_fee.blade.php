@@ -15,7 +15,7 @@
                     <div class="col-12">
                         <div class="box bb-3 border-warning">
                             <div class="box-header">
-                                <h4 class="box-title">Student <strong>Exam Fee</strong></h4>
+                                <h4 class="box-title">Student <strong>Monthly Fee</strong></h4>
                             </div>
 
                             <div class="box-body">
@@ -58,7 +58,7 @@
                                             <div class="form-group">
                                                 <h5>Month</h5>
                                                 <div class="controls">
-                                                    <select name="month" id="month" class="form-control">
+                                                    <select name="month" required="" id="month" class="form-control">
                                                         <option value="" selected disabled>Select Month</option>
 
                                                         @foreach ($monthes as $key => $month)
@@ -126,7 +126,7 @@
           var class_id = $('#class_id').val();
           var month = $('#month').val();
            $.ajax({
-            url: "{{ route('exam.fee.generate')}}",
+            url: "{{ route('month.fee.generate')}}",
             type: "get",
             dataType: 'json',
             data: {

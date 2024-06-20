@@ -35,14 +35,14 @@
 
 <body>
 
-    <h1>Fee Details of student: {{ $assign_student->student->name }}</h1>
+    <h2>{{ $month }} Fee Details of student: {{ $assign_student->student->name }}</h2>
 
     <table id="customers">
         <thead>
             <tr>
                 <th>#</th>
-                <th>Student Fee Data</th>
-                <th>Student Fee Details</th>
+                <th>Student Monthly Fee Data</th>
+                <th>Student Monthly Fee Details</th>
             </tr>
         </thead>
 
@@ -79,8 +79,8 @@
             </tr>
             <tr>
                 <td>7</td>
-                <td>Registration Fee (sum)</td>
-                <td>{{ $fee_amount->amount }}</td>
+                <td>Monthly Fee (sum)</td>
+                <td>{{ $fee_category_amount->amount }}</td>
             </tr>
             <tr>
                 <td>8</td>
@@ -89,7 +89,7 @@
             </tr>
             <tr>
                 <td>9</td>
-                <td>Student Fee (sum)</td>
+                <td>Student {{ $month }} month Fee (sum)</td>
                 <td>{{ $final_fee }}</td>
             </tr>
         </tbody>

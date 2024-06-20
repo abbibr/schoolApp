@@ -8,6 +8,7 @@ use App\Models\FeeCategoryAmount;
 use Illuminate\Http\Request;
 use App\Models\StudentClass;
 use App\Models\StudentYear;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class MonthlyFeeController extends Controller
 {
@@ -30,7 +31,7 @@ class MonthlyFeeController extends Controller
             'December' => 'December'
         ];
 
-        return view('backend.student.exam_fee.exam_fee_view', [
+        return view('backend.student.monthly_fee.month_fee', [
             'years' => $years,
             'classes' => $classes,
             'monthes' => $monthes
@@ -79,7 +80,7 @@ class MonthlyFeeController extends Controller
 
             $html[$key]['tdsource'] .= '<td>' . $finalfee . '</td>';
             $html[$key]['tdsource'] .= '<td>';
-            $html[$key]['tdsource'] .= '<a class="btn btn-sm btn-success" title="PaySlip" target="_blanks" href="' . route("exam.pdf.generate") . '?class_id=' . $value->class_id . '&month=' . $request->month . '&student_id=' . $value->student_id . '">Exam Fee</a>';
+            $html[$key]['tdsource'] .= '<a class="btn btn-sm btn-success" title="PaySlip" target="_blanks" href="' . route("month.pdf.generate") . '?class_id=' . $value->class_id . '&month=' . $request->month . '&student_id=' . $value->student_id . '">Monthly Fee</a>';
             $html[$key]['tdsource'] .= '</td>';
         }
 
@@ -88,7 +89,31 @@ class MonthlyFeeController extends Controller
 
     public function pdfGenerate(Request $request)
     {
-        return $request->student_id;
+        $class_id = $request->class_id;
+        $student_id = $request->student_id;
+        $month = $request->month;
+
+        $assign_student = AssignStudent::where('class_id', $class_id)
+                            ->where('student_id', $student_id)
+                            ->first();
+
+        $fee_category_amount = FeeCategoryAmount::where('fee_category_id', 2)
+                            ->where('student_class_id', $class_id)
+                            ->first();
+        
+        $original_amount = $fee_category_amount->amount;
+        $discount = $assign_student->discount[0]->discount;
+        $discount_sum = $original_amount / 100 * $discount;
+        $final_fee = floatval($original_amount) - floatval($discount_sum);
+
+        $pdf = Pdf::loadView('backend.student.monthly_fee.month_pdf', [
+            'assign_student' => $assign_student,
+            'fee_category_amount' => $fee_category_amount,
+            'final_fee' => $final_fee,
+            'month' => $month
+        ]);
+
+        return $pdf->download("$month/".$assign_student->student->name.".pdf");
     }
 }
 

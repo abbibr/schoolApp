@@ -187,8 +187,8 @@ Route::prefix('/admin/students/')->group(function() {
     });
 
     Route::controller(MonthlyFeeController::class)->group(function() {
-        Route::get('/exam/fee/view', 'feeView')->name('exam.fee.view');
-        Route::get('/exam/fee/generate', 'feeGenerate')->name('exam.fee.generate');
-        Route::get('/exam/pdf/generate', 'pdfGenerate')->name('exam.pdf.generate');
+        Route::get('/month/fee/view', 'feeView')->name('month.fee.view');
+        Route::get('/month/fee/generate', 'feeGenerate')->name('month.fee.generate');
+        Route::get('/month/pdf/generate', 'pdfGenerate')->name('month.pdf.generate');
     });
 });
