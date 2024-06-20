@@ -9,16 +9,31 @@ use Illuminate\Http\Request;
 use App\Models\StudentClass;
 use App\Models\StudentYear;
 
-class ExamFeeController extends Controller
+class MonthlyFeeController extends Controller
 {
     public function feeView()
     {
         $years = StudentYear::orderBy('name', 'asc')->get();
         $classes = StudentClass::all();
+        $monthes = [
+            'January' => 'January',
+            'February' => 'February',
+            'March' => 'March',
+            'April' => 'April',
+            'May' => 'May',
+            'June' => 'June',
+            'July' => 'July',
+            'August' => 'August',
+            'September' => 'September',
+            'October' => 'October',
+            'November' => 'November',
+            'December' => 'December'
+        ];
 
         return view('backend.student.exam_fee.exam_fee_view', [
             'years' => $years,
-            'classes' => $classes
+            'classes' => $classes,
+            'monthes' => $monthes
         ]);
     }
 
@@ -43,7 +58,7 @@ class ExamFeeController extends Controller
         foreach ($assign_students as $key => $value) {
             $fee_category_amount = FeeCategoryAmount::where('fee_category_id', 4)
                 ->where('student_class_id', $class_id)
-                ->get();
+                ->first();
 
                 $html[$key]['tdsource'] = '<td>' . ($key + 1) . '</td>';
                 $html[$key]['tdsource'] .= '<td>' . $value->student->id_no . '</td>';
@@ -59,10 +74,11 @@ class ExamFeeController extends Controller
     
                 $html[$key]['tdsource'] .= '<td>' . $finalfee . '</td>';
                 $html[$key]['tdsource'] .= '<td>';
-                $html[$key]['tdsource'] .= '<a class="btn btn-sm btn-green" title="PaySlip" target="_blanks" href="'.route("student.registration.fee.payslip").'?class_id='.$value->class_id.'&student_id='.$value->student_id.'">Exam Fee</a>';
+                $html[$key]['tdsource'] .= '<a class="btn btn-sm btn-success" title="PaySlip" target="_blanks" href="'.route("student.registration.fee.payslip").'?class_id='.$value->class_id.'&student_id='.$value->student_id.'">Exam Fee</a>';
                 $html[$key]['tdsource'] .= '</td>';
         }
 
         return response()->json(@$html);
     }
 }
+
