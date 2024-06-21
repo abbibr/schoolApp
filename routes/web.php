@@ -196,5 +196,6 @@ Route::prefix('/admin/students/')->group(function() {
     Route::controller(ExamFeeController::class)->group(function() {
         Route::get('/exam/fee/view', 'feeView')->name('exam.fee.view');
         Route::get('/exam/fee/generate', 'feeGenerate')->name('exam.fee.generate');
+        Route::get('/exam/pdf/generate', 'feePdf')->name('exam.pdf.generate');
     });
 });
