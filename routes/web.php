@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\Setup\StudentGroupController;
 use App\Http\Controllers\Backend\Setup\StudentShiftController;
 use App\Http\Controllers\Backend\Setup\StudentSubjectController;
 use App\Http\Controllers\Backend\Setup\StudentYearController;
+use App\Http\Controllers\Backend\Student\ExamFeeController;
 use App\Http\Controllers\Backend\Student\MonthlyFeeController;
 use App\Http\Controllers\Backend\Student\StudentRegController;
 use App\Http\Controllers\Backend\Student\StudentRoleController;
@@ -190,5 +191,10 @@ Route::prefix('/admin/students/')->group(function() {
         Route::get('/month/fee/view', 'feeView')->name('month.fee.view');
         Route::get('/month/fee/generate', 'feeGenerate')->name('month.fee.generate');
         Route::get('/month/pdf/generate', 'pdfGenerate')->name('month.pdf.generate');
+    });
+
+    Route::controller(ExamFeeController::class)->group(function() {
+        Route::get('/exam/fee/view', 'feeView')->name('exam.fee.view');
+        Route::get('/exam/fee/generate', 'feeGenerate')->name('exam.fee.generate');
     });
 });
