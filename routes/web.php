@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryAmountController;
@@ -197,5 +198,16 @@ Route::prefix('/admin/students/')->group(function() {
         Route::get('/exam/fee/view', 'feeView')->name('exam.fee.view');
         Route::get('/exam/fee/generate', 'feeGenerate')->name('exam.fee.generate');
         Route::get('/exam/pdf/generate', 'feePdf')->name('exam.pdf.generate');
+    });
+});
+
+Route::prefix('/admin/employees')->group(function() {
+    Route::controller(EmployeeRegController::class)->group(function() {
+        Route::get('/registration/view', 'employeeView')->name('employee.registration.view');
+        Route::get('/registration/add', 'employeeAdd')->name('employee.registration.add');
+        Route::post('/registration/store', 'employeeStore')->name('employee.registration.store');
+        Route::get('/registration/edit/{id}', 'employeeEdit')->name('employee.registration.edit');
+        Route::post('/registration/update/{id}', 'employeeUpdate')->name('employee.registration.update');
+        Route::get('/registration/delete/{id}', 'employeeDelete')->name('employee.registration.delete');
     });
 });
