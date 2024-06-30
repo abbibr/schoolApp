@@ -219,4 +219,13 @@ class EmployeeRegController extends Controller
 
         return back()->with($notification);
     }
+
+    public function employeeDetails($id) {
+        $employee_user = User::findOrFail($id);
+        $pdf = PDF::loadView('backend.employee.employee_reg.employee_pdf', [
+            'employee_user' => $employee_user
+        ]);
+
+        return $pdf->download('detailsEmployee/'.$employee_user->name.".pdf");
+    }
 }
