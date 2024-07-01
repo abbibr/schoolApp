@@ -17,6 +17,8 @@ use Barryvdh\DomPDF\Facade\PDF;
 
 use App\Models\Designation;
 use App\Models\EmployeeSalary;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ExportEmployee;
 
 class EmployeeRegController extends Controller
 {
@@ -230,12 +232,6 @@ class EmployeeRegController extends Controller
     }
 
     public function employeeLists() {
-        $employees = User::where('usertype', 'employee')->get();
-
-        $pdf = PDF::loadView('backend.employee.employee_reg.employee_lists', [
-            'employees' => $employees
-        ]);
-
-        return $pdf->download('employees.pdf');
+        return Excel::download(new ExportEmployee, 'employees.xlsx');
     }
 }

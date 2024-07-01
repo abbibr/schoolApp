@@ -35,20 +35,36 @@
 
 <body>
 
-    <h1>Details of all employees:</h1>
-
     <table id="customers">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Employee ID</th>
-                <th>Employee Name</th>
-                <th>Employee Phone</th>
-                <th>Employee Date of Birth</th>
-                <th>Employee Address</th>
-                <th>Employee Joining date</th>
-                <th>Employee Present Salary </th>
-                <th>Employee Designation</th>
+                <th>
+                    <b>#</b>
+                </th>
+                <th>
+                    <b>Employee ID</b>
+                </th>
+                <th>
+                    <b>Employee Name</b>
+                </th>
+                <th>
+                    <b>Employee Phone</b>
+                </th>
+                <th>
+                    <b>Employee Date of Birth</b>
+                </th>
+                <th>
+                    <b>Employee Address</b>
+                </th>
+                <th>
+                    <b>Employee Joining date</b>
+                </th>
+                <th>
+                    <b>Employee Present Salary</b>
+                </th>
+                <th>
+                    <b>Employee Designation</b>
+                </th>
             </tr>
         </thead>
 
@@ -69,9 +85,7 @@
                 </tr>
             @endforeach
         </tbody>
-    </table> <br>
-
-    <p>Printed date: {{ now()->format('d/M/Y') }}</p>
+    </table>
 
 </body>
 
