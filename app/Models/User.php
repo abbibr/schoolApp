@@ -55,7 +55,13 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function employee_salary() {
+    public function employee_salary()
+    {
         return $this->hasMany(EmployeeSalary::class, 'employee_id', 'id');
+    }
+
+    public function designation()
+    {
+        return $this->belongsTo(Designation::class, 'designation_id', 'id');
     }
 }

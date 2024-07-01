@@ -35,7 +35,7 @@
 
 <body>
 
-    <h1>Fee Details of employee: {{ $employee_user->name }}</h1>
+    <h1>Details of employee: {{ $employee_user->name }}</h1>
 
     <table id="customers">
         <thead>

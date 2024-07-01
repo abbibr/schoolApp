@@ -210,5 +210,6 @@ Route::prefix('/admin/employees')->group(function() {
         Route::post('/registration/update/{id}', 'employeeUpdate')->name('employee.registration.update');
         Route::get('/registration/delete/{id}', 'employeeDelete')->name('employee.registration.delete');
         Route::get('/registration/details/{id}', 'employeeDetails')->name('employee.registration.details');
+        Route::get('/registration/lists', 'employeeLists')->name('employee.registration.lists');
     });
 });

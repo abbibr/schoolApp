@@ -228,4 +228,14 @@ class EmployeeRegController extends Controller
 
         return $pdf->download('detailsEmployee/'.$employee_user->name.".pdf");
     }
+
+    public function employeeLists() {
+        $employees = User::where('usertype', 'employee')->get();
+
+        $pdf = PDF::loadView('backend.employee.employee_reg.employee_lists', [
+            'employees' => $employees
+        ]);
+
+        return $pdf->download('employees.pdf');
+    }
 }
