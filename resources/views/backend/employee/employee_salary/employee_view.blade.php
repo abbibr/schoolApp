@@ -14,11 +14,9 @@
                         <div class="box">
                             <div class="box-header with-border">
 
-                                <h3 class="box-title">Employee List</h3>
+                                <h3 class="box-title">Employee Salary List</h3>
                                 <a href="{{ route('employee.registration.add') }}" style="float: right;"
-                                    class="btn btn-rounded btn-info mb-5">Add Employee</a>
-                                <a href="{{ route('employee.registration.lists') }}" style="margin-left: 10px;"
-                                    class="btn btn-rounded btn-success mb-5">Employees List</a>
+                                    class="btn btn-rounded btn-info mb-5">Add Employee Salary</a>
 
                             </div>
                             <!-- /.box-header -->
@@ -34,9 +32,7 @@
                                                 <th>Gender</th>
                                                 <th>Join Date</th>
                                                 <th>Salary</th>
-                                                @if (auth()->user()->role == 'admin')
-                                                    <th>Code</th>
-                                                @endif
+                                                <th>Designation</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -50,18 +46,14 @@
                                                         <td>{{ $data->id_no }}</td>
                                                         <td>{{ $data->mobile }}</td>
                                                         <td>{{ $data->gender }}</td>
-                                                        <td>{{ date('d/m/Y', strtotime($data->join_date)) }}</td>
-                                                        <td>{{ $data->salary }}</td>
-                                                        @if (auth()->user()->role == 'admin')
-                                                            <td>{{ $data->code }}</td>
-                                                        @endif
+                                                        <td>{{ date('d/M/Y', strtotime($data->join_date)) }}</td>
+                                                        <td>{{ $data->employee_salary->last()->present_salary }}</td>
+                                                        <td>{{ $data->designation->name }}</td>
                                                         <td width="25%">
-                                                            <a href="{{ route('employee.registration.edit', $data->id) }}"
-                                                                class="btn btn-info">Edit</a> &nbsp;
-                                                            <a href="{{ route('employee.registration.delete', $data->id) }}"
-                                                                class="btn btn-danger" id="delete">Delete</a>
-                                                            <a href="{{ route('employee.registration.details', $data->id) }}"
-                                                                class="btn btn-primary">Details</a>
+                                                            <a title="Increment" href="{{ route('employee.salary.increment', $data->id) }}"
+                                                                class="btn btn-info"><i class="fa fa-plus-circle"></i></a> &nbsp;
+                                                            <a title="Details" href="{{ route('employee.registration.details', $data->id) }}"
+                                                                class="btn btn-primary"><i class="fa fa-eye"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

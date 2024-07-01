@@ -78,7 +78,7 @@
                     <td>{{ $employee->dob }}</td>
                     <td>{{ $employee->address }}</td>
                     <td>
-                        {{ $employee->join_date }}
+                        {{ date('d/m/Y', strtotime($employee->join_date ))}}
                     </td>
                     <td>{{ $employee->employee_salary[0]->present_salary }}</td>
                     <td>{{ $employee->designation->name }}</td>

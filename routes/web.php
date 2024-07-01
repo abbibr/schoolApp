@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
+use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryAmountController;
@@ -211,5 +212,11 @@ Route::prefix('/admin/employees')->group(function() {
         Route::get('/registration/delete/{id}', 'employeeDelete')->name('employee.registration.delete');
         Route::get('/registration/details/{id}', 'employeeDetails')->name('employee.registration.details');
         Route::get('/registration/lists', 'employeeLists')->name('employee.registration.lists');
+    });
+
+    Route::controller(EmployeeSalaryController::class)->group(function() {
+        Route::get('/salary/view', 'salaryView')->name('employee.salary.view');
+        Route::get('/salary/increment/{id}', 'salaryIncrement')->name('employee.salary.increment');
+        Route::post('/salary/update/{id}', 'salaryUpdate')->name('employee.increment.update');
     });
 });
