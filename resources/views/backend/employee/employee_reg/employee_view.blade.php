@@ -18,7 +18,7 @@
                                 <a href="{{ route('employee.registration.add') }}" style="float: right;"
                                     class="btn btn-rounded btn-info mb-5">Add Employee</a>
                                 <a href="{{ route('employee.registration.lists') }}" style="margin-left: 10px;"
-                                    class="btn btn-rounded btn-success mb-5">Employees List</a>
+                                    class="btn btn-rounded btn-success mb-5">Employees Lists</a>
 
                             </div>
                             <!-- /.box-header -->
