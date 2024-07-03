@@ -202,6 +202,8 @@ Route::prefix('/admin/students/')->group(function() {
     });
 });
 
+
+// Employee Part (Registration, Salary, Attendance...)
 Route::prefix('/admin/employees')->group(function() {
     Route::controller(EmployeeRegController::class)->group(function() {
         Route::get('/registration/view', 'employeeView')->name('employee.registration.view');
