@@ -218,5 +218,6 @@ Route::prefix('/admin/employees')->group(function() {
         Route::get('/salary/view', 'salaryView')->name('employee.salary.view');
         Route::get('/salary/increment/{id}', 'salaryIncrement')->name('employee.salary.increment');
         Route::post('/salary/update/{id}', 'salaryUpdate')->name('employee.increment.update');
+        Route::get('/salary/details/{id}', 'salaryDetails')->name('employee.salary.details');
     });
 });

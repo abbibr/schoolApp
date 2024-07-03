@@ -52,7 +52,7 @@
                                                         <td width="25%">
                                                             <a title="Increment" href="{{ route('employee.salary.increment', $data->id) }}"
                                                                 class="btn btn-info"><i class="fa fa-plus-circle"></i></a> &nbsp;
-                                                            <a title="Details" href="{{ route('employee.registration.details', $data->id) }}"
+                                                            <a title="Details" href="{{ route('employee.salary.details', $data->id) }}"
                                                                 class="btn btn-primary"><i class="fa fa-eye"></i></a>
                                                         </td>
                                                     </tr>

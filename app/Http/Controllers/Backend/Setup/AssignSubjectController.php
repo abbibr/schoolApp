@@ -15,7 +15,7 @@ class AssignSubjectController extends Controller
                     ->groupBy('class_id')
                     ->get();
 
-        return view('backend.setup.assign_subject.view_assign_subjec    t', [
+        return view('backend.setup.assign_subject.view_assign_subject', [
             'datas' => $datas
         ]);
     }
