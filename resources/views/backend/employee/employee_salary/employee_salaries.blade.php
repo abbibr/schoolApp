@@ -17,6 +17,9 @@
                                 <h2 class="box-title">Employee Salary Details</h2>
                                 <h5>Employee Name: {{ $employee_salaries[0]->user->name }}</h5>
                                 <h5>Employee ID: {{ $employee_salaries[0]->user->id_no }}</h5>
+                                <h5>Employee Designation: 
+                                    <b>{{ $employee_salaries[0]->user->designation->name }}</b>
+                                </h5>
 
                             </div>
                             <!-- /.box-header -->
