@@ -36,9 +36,21 @@
                                             @foreach ($employee_salaries as $id => $value)
                                                 <tr>
                                                     <td width="5%">{{ $id + 1 }}</td>
-                                                    <td>{{ $value->previous_salary }}</td>
-                                                    <td>{{ $value->increment_salary }}</td>
-                                                    <td>{{ $value->present_salary }}</td>
+                                                    <td>
+                                                        @php
+                                                           echo number_format($value->previous_salary, 0);
+                                                        @endphp
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                           echo number_format($value->increment_salary, 0);
+                                                        @endphp
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                           echo number_format($value->present_salary, 0);
+                                                        @endphp
+                                                    </td>
                                                     <td>{{ date('d/M/Y', strtotime($value->effected_salary)) }}</td>
                                                 </tr>
                                             @endforeach
