@@ -15,6 +15,10 @@ use App\Models\LeavePurpose;
 class EmployeeLeaveController extends Controller
 {
     public function leaveView() {
-        //
+        $datas = EmployeeLeave::latest()->get();
+        
+        return view('backend.employee.employee_leave.leave_view', [
+            'datas' => $datas
+        ]);
     }
 }
