@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
@@ -205,6 +206,7 @@ Route::prefix('/admin/students/')->group(function() {
 
 // Employee Part (Registration, Salary, Attendance...)
 Route::prefix('/admin/employees')->group(function() {
+    // Employee Registration 
     Route::controller(EmployeeRegController::class)->group(function() {
         Route::get('/registration/view', 'employeeView')->name('employee.registration.view');
         Route::get('/registration/add', 'employeeAdd')->name('employee.registration.add');
@@ -216,10 +218,15 @@ Route::prefix('/admin/employees')->group(function() {
         Route::get('/registration/lists', 'employeeLists')->name('employee.registration.lists');
     });
 
+    // Employee Salary
     Route::controller(EmployeeSalaryController::class)->group(function() {
         Route::get('/salary/view', 'salaryView')->name('employee.salary.view');
         Route::get('/salary/increment/{id}', 'salaryIncrement')->name('employee.salary.increment');
         Route::post('/salary/update/{id}', 'salaryUpdate')->name('employee.increment.update');
         Route::get('/salary/details/{id}', 'salaryDetails')->name('employee.salary.details');
+    });
+
+    Route::controller(EmployeeLeaveController::class)->group(function() {
+        Route::get('/leave/view', 'leaveView')->name('employee.leave.view');
     });
 });

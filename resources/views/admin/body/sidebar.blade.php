@@ -161,6 +161,9 @@
                     <li class="{{ $route == 'employee.salary.view' ? 'active' : '' }}">
                         <a href="{{ route('employee.salary.view') }}"><i class="ti-more"></i>Employee Salary</a>
                     </li>
+                    <li class="{{ $route == 'employee.leave.view' ? 'active' : '' }}">
+                        <a href="{{ route('employee.leave.view') }}"><i class="ti-more"></i>Employee Leave</a>
+                    </li>
                 </ul>
             </li>
 
