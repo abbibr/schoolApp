@@ -42,8 +42,8 @@
                                @foreach ($datas as $id => $data)
                                 <tr>
                                     <td width="5%">{{ $id+1 }}</td>
-                                    <td>{{ $data->user->id_no }}</td>
-                                    <td>{{ $data->user->name }}</td>
+                                    <td>{{ $data->employee->id_no }}</td>
+                                    <td>{{ $data->employee->name }}</td>
                                     <td>{{ $data->purpose->name }}</td>
                                     <td>{{ $data->start_date }}</td>
                                     <td>{{ $data->end_date }}</td>

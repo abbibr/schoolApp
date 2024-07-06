@@ -11,6 +11,8 @@ class EmployeeLeave extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     // employee = user
     public function employee() {
         return $this->belongsTo(User::class, 'employee_id', 'id');

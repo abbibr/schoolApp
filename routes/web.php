@@ -230,6 +230,6 @@ Route::prefix('/admin/employees')->group(function() {
     Route::controller(EmployeeLeaveController::class)->group(function() {
         Route::get('/leave/view', 'leaveView')->name('employee.leave.view');
         Route::get('/leave/add', 'leaveAdd')->name('employee.leave.add');
-        Route::get('/leave/store', 'leaveStore')->name('employee.leave.store');
+        Route::post('/leave/store', 'leaveStore')->name('employee.leave.store');
     });
 });
