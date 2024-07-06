@@ -16,7 +16,7 @@
 				<div class="box-header with-border">
 
 				  <h3 class="box-title">Employee Leave</h3>
-                  <a href="{{ route('designation.add') }}" style="float: right;" class="btn btn-rounded btn-info mb-5">Add Employee Leave</a>
+                  <a href="{{ route('employee.leave.add') }}" style="float: right;" class="btn btn-rounded btn-info mb-5">Add Employee Leave</a>
 
 				</div>
 				<!-- /.box-header -->
@@ -54,7 +54,7 @@
                                 </tr>
                                @endforeach 
                             @else
-                                <h3 class="box-title">There is no any leaving employee!</h3>
+                                <h3 class="box-title">There is no any left employee!</h3>
                             @endif
 
 						</tfoot>

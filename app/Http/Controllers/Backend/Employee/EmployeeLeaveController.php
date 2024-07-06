@@ -21,4 +21,18 @@ class EmployeeLeaveController extends Controller
             'datas' => $datas
         ]);
     }
+
+    public function leaveAdd() {
+        $employees = User::where('usertype', 'employee')->get();
+        $purposes = LeavePurpose::all();
+
+        return view('backend.employee.employee_leave.leave_add', [
+            'employees' => $employees,
+            'purposes' => $purposes
+        ]);
+    }
+
+    public function leaveStore() {
+        //
+    }
 }
