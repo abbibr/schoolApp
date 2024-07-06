@@ -23,50 +23,63 @@ class EmployeeLeaveController extends Controller
     public function leaveAdd() {
         $employees = User::where('usertype', 'employee')->get();
         $purposes = LeavePurpose::all();
+        $leaves = EmployeeLeave::all();
 
         return view('backend.employee.employee_leave.leave_add', [
             'employees' => $employees,
-            'purposes' => $purposes
+            'purposes' => $purposes,
+            'leaves' => $leaves
         ]);
     }
 
     public function leaveStore(Request $request) {
         $employee = User::where('id', $request->employee_id)->first();
+        $employee_leave = EmployeeLeave::where('employee_id', $request->employee_id)->first();
 
-        if($request->purpose_id == 0) {
-            $purpose = LeavePurpose::create([
-                'name' => $request->name
-            ]);
-
-            EmployeeLeave::create([
-                'employee_id' => $employee->id,
-                'purpose_id' => $purpose->id,
-                'start_date' => date('Y-m-d', strtotime($request->start_date)),
-                'end_date' => date('Y-m-d', strtotime($request->end_date))
-            ]);
-
-            $notification = [
-                'message' => 'Left Employee Successfully Inserted',
-                'alert-type' => 'success'
-            ];
-
-            return redirect()->route('employee.leave.view')->with($notification);
+        if (empty($employee_leave)) {
+            if($request->purpose_id == 0) {
+                $purpose = LeavePurpose::create([
+                    'name' => $request->name
+                ]);
+    
+                EmployeeLeave::create([
+                    'employee_id' => $employee->id,
+                    'purpose_id' => $purpose->id,
+                    'start_date' => date('Y-m-d', strtotime($request->start_date)),
+                    'end_date' => date('Y-m-d', strtotime($request->end_date))
+                ]);
+    
+                $notification = [
+                    'message' => 'Left Employee Successfully Inserted',
+                    'alert-type' => 'success'
+                ];
+    
+                return redirect()->route('employee.leave.view')->with($notification);
+            }
+            else 
+            {
+                EmployeeLeave::create([
+                    'employee_id' => $employee->id,
+                    'purpose_id' => $request->purpose_id,
+                    'start_date' => date('Y-m-d', strtotime($request->start_date)),
+                    'end_date' => date('Y-m-d', strtotime($request->end_date))
+                ]);
+    
+                $notification = [
+                    'message' => 'Left Employee Successfully Inserted',
+                    'alert-type' => 'success'
+                ];
+    
+                return redirect()->route('employee.leave.view')->with($notification);
+            }
         }
-        else 
-        {
-            EmployeeLeave::create([
-                'employee_id' => $employee->id,
-                'purpose_id' => $request->purpose_id,
-                'start_date' => date('Y-m-d', strtotime($request->start_date)),
-                'end_date' => date('Y-m-d', strtotime($request->end_date))
-            ]);
-
+        else {
             $notification = [
-                'message' => 'Left Employee Successfully Inserted',
-                'alert-type' => 'success'
+                'message' => 'This employee has already left!',
+                'alert-type' => 'error'
             ];
 
-            return redirect()->route('employee.leave.view')->with($notification);
+            return redirect()->back()->with($notification);
         }
     }
 }

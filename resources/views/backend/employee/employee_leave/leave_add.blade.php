@@ -36,7 +36,8 @@
                                                     <select name="employee_id" id="employee_id" class="form-control">
                                                         <option value="" selected disabled>Select Employee</option>
                                                         
-                                                        @foreach ($employees as $value)
+                                                        @foreach ($employees as $key => $value)
+
                                                             <option value="{{ $value->id }}">
                                                                 {{ $value->name }}
                                                             </option>
