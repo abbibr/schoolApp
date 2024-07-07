@@ -82,4 +82,54 @@ class EmployeeLeaveController extends Controller
             return redirect()->back()->with($notification);
         }
     }
+
+    public function leaveEdit($id) {
+        $employee_leave = EmployeeLeave::findOrFail($id);
+        $employees = User::where('usertype', 'employee')->get();
+        $purposes = LeavePurpose::all();
+
+        return view('backend.employee.employee_leave.leave_edit', [
+            'employee_leave' => $employee_leave,
+            'employees' => $employees,
+            'purposes' => $purposes
+        ]);
+    }
+
+    public function leaveUpdate($id, Request $request) {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ],
+        [
+            'start_date.required' => 'Please enter the start date of leaving employee!',
+            'end_date.required' => 'Please enter the end date of leaving employee!',
+        ]);
+
+        $employee_leave = EmployeeLeave::findOrFail($id);
+        $leave = EmployeeLeave::where('employee_id', $request->employee_id)->whereNot('id', $id)->first();
+
+        if (!empty($leave)) {
+            $notification = [
+                'message' => 'This employee has already left!',
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->back()->with($notification);
+        }
+        else {
+            $employee_leave->update([
+                'employee_id' => $request->employee_id,
+                'purpose_id' => $request->purpose_id,
+                'start_date' => date('Y-m-d', strtotime($request->start_date)),
+                'end_date' => date('Y-m-d', strtotime($request->end_date)),
+            ]);
+
+            $notification = [
+                'message' => 'Successfully Updated',
+                'alert-type' => 'success'
+            ];
+
+            return redirect()->route('employee.leave.view')->with($notification);
+        }
+    }
 }

@@ -231,5 +231,7 @@ Route::prefix('/admin/employees')->group(function() {
         Route::get('/leave/view', 'leaveView')->name('employee.leave.view');
         Route::get('/leave/add', 'leaveAdd')->name('employee.leave.add');
         Route::post('/leave/store', 'leaveStore')->name('employee.leave.store');
+        Route::get('/leave/edit/{id}', 'leaveEdit')->name('employee.leave.edit');
+        Route::post('/leave/update/{id}', 'leaveUpdate')->name('employee.leave.update');
     });
 });
