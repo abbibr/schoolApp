@@ -49,7 +49,6 @@
                                     <td>{{ $data->end_date }}</td>
                                     <td width="25%">
                                         <a href="{{ route('employee.leave.edit', $data->id) }}" class="btn btn-info">Edit</a> &nbsp;
-                                        <a href="{{ route('designation.delete', $data->id) }}" class="btn btn-danger" id="delete">Delete</a>
                                     </td>
                                 </tr>
                                @endforeach 
