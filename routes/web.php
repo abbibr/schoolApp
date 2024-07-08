@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
 use App\Http\Controllers\backend\employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
@@ -233,5 +234,12 @@ Route::prefix('/admin/employees')->group(function() {
         Route::post('/leave/store', 'leaveStore')->name('employee.leave.store');
         Route::get('/leave/edit/{id}', 'leaveEdit')->name('employee.leave.edit');
         Route::post('/leave/update/{id}', 'leaveUpdate')->name('employee.leave.update');
+    });
+
+    // Employee Attendance
+    Route::controller(EmployeeAttendanceController::class)->group(function() {
+        Route::get('/attendance/view', 'attendanceView')->name('employee.attendance.view');
+        Route::get('/attendance/add', 'attendanceAdd')->name('employee.attendance.add');
+        Route::post('/attendance/store', 'attendanceStore')->name('employee.attendance.store');
     });
 });
