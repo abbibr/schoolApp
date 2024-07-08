@@ -30,6 +30,30 @@ class EmployeeAttendanceController extends Controller
     }
 
     public function attendanceStore(Request $request) {
-        return $request->group;
+        $request->validate([
+            'date' => 'date|required'
+        ], 
+        [
+            'date.required' => 'Please enter the Date!'
+        ]);
+
+        $employees_id = $request->employee_id;
+
+        foreach ($employees_id as $key => $employee_id) {
+            $attend_status = 'attend_status'.$key;
+
+            EmployeeAttendance::create([
+                'date' => date('Y-m-d', strtotime($request->date)),
+                'user_id' => $employee_id,
+                'attend_status' => $request->$attend_status
+            ]);
+        }
+
+        $notification = [
+            'message' => 'Employees` Attendance Successfully Inserted',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('employee.attendance.view')->with($notification);
     }
 }

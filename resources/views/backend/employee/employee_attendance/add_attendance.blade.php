@@ -9,7 +9,7 @@
                 <!-- Basic Forms -->
                 <div class="box">
                     <div class="box-header with-border">
-                        <h4 class="box-title">Add Designation</h4>
+                        <h4 class="box-title">Employees` Attendance</h4>
                         <h6 class="box-subtitle">School Management Platform</h6>
 
                         @if ($errors->count())
@@ -31,9 +31,9 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <h5>Designation Name <span class="text-danger">*</span></h5>
+                                                <h5>Attendance Date <span class="text-danger">*</span></h5>
                                                 <div class="controls">
-                                                    <input type="date" name="name" class="form-control">
+                                                    <input type="date" name="date" class="form-control">
                                                 </div>
                                             </div>
                                         </div>

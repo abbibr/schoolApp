@@ -44,7 +44,7 @@
                                     <td>{{ $data->user_id }}</td>
                                     <td>{{ $data->user_id }}</td>
                                     <td>{{ $data->user_id }}</td>
-                                    <td>{{ $data }}</td>
+                                    <td>{{ $data->user_id }}</td>
                                     <td width="25%">
                                         <a href="{{ route('employee.leave.edit', $data->id) }}" class="btn btn-info">Edit</a> &nbsp;
                                     </td>
