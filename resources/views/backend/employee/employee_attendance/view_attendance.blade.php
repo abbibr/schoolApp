@@ -16,7 +16,7 @@
 				<div class="box-header with-border">
 
 				  <h3 class="box-title">Employee Attendance List</h3>
-                  <a href="{{ route('employee.attendance.add') }}" style="float: right;" class="btn btn-rounded btn-info mb-5">Add Attendance</a>
+                  <a href="{{ route('employee.attendance.add') }}" style="float: right;" class="btn btn-rounded btn-success mb-5">Add Attendance</a>
 
 				</div>
 				<!-- /.box-header -->
@@ -27,10 +27,7 @@
 							@if ($datas->count())
                                 <tr>
                                     <th>#</th>
-                                    <th>Employee ID</th>
-                                    <th>Employee Name</th>
                                     <th>Date</th>
-                                    <th>Attend Status</th>
                                     <th>Action</th>
                                 </tr>
                             @endif
@@ -40,13 +37,11 @@
 							@if($datas->count())
                                @foreach ($datas as $id => $data)
                                 <tr>
-                                    <td width="5%">{{ $id+1 }}</td>
-                                    <td>{{ $data->user_id }}</td>
-                                    <td>{{ $data->user_id }}</td>
-                                    <td>{{ $data->user_id }}</td>
-                                    <td>{{ $data->user_id }}</td>
-                                    <td width="25%">
-                                        <a href="{{ route('employee.leave.edit', $data->id) }}" class="btn btn-info">Edit</a> &nbsp;
+                                    <td width="10%">{{ $id+1 }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($data->date)) }}</td>
+                                    <td width="35%">
+										<a href="{{ route('employee.attendance.edit', $data->date) }}" class="btn btn-info">Edit</a> &nbsp;
+                                        <a href="{{ route('employee.attendance.details', $data->date) }}" class="btn btn-primary">Details</a> &nbsp;
                                     </td>
                                 </tr>
                                @endforeach 

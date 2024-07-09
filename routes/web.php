@@ -241,5 +241,7 @@ Route::prefix('/admin/employees')->group(function() {
         Route::get('/attendance/view', 'attendanceView')->name('employee.attendance.view');
         Route::get('/attendance/add', 'attendanceAdd')->name('employee.attendance.add');
         Route::post('/attendance/store', 'attendanceStore')->name('employee.attendance.store');
+        Route::get('/attendance/details/{date}', 'attendanceDetails')->name('employee.attendance.details');
+        Route::get('/attendance/edit/{date}', 'attendanceEdit')->name('employee.attendance.edit');
     });
 });

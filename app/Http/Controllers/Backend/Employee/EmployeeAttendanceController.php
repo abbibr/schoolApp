@@ -14,7 +14,7 @@ use App\Models\EmployeeAttendance;
 class EmployeeAttendanceController extends Controller
 {
     public function attendanceView() {
-        $datas = EmployeeAttendance::latest()->get();
+        $datas = EmployeeAttendance::select('date')->groupBy('date')->orderBy('date', 'desc')->get();
 
         return view('backend.employee.employee_attendance.view_attendance', [
             'datas' => $datas
@@ -55,5 +55,21 @@ class EmployeeAttendanceController extends Controller
         ];
 
         return redirect()->route('employee.attendance.view')->with($notification);
+    }
+
+    public function attendanceDetails($date) {
+        $dateAttendances = EmployeeAttendance::where('date', $date)->get();
+
+        return view('backend.employee.employee_attendance.details_attendance', [
+            'dateAttendances' => $dateAttendances
+        ]);
+    }
+
+    public function attendanceEdit($date) {
+        $edit_employees = EmployeeAttendance::where('date', $date)->get();
+
+        return view('backend.employee.employee_attendance.edit_attendance', [
+            'edit_employees' => $edit_employees
+        ]);
     }
 }
