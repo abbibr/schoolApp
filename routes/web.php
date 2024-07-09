@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\Employee\EmployeeAttendanceController;
 use App\Http\Controllers\backend\employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
+use App\Http\Controllers\Backend\Employee\MonthlySalaryController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryAmountController;
@@ -244,6 +245,10 @@ Route::middleware('auth')->group(function() {
             Route::get('/attendance/details/{date}', 'attendanceDetails')->name('employee.attendance.details');
             Route::get('/attendance/edit/{date}', 'attendanceEdit')->name('employee.attendance.edit');
             Route::post('/attendance/update/{date}', 'attendanceUpdate')->name('employee.attendance.update');
+        });
+
+        Route::controller(MonthlySalaryController::class)->group(function() {
+            Route::get('/monthly/salary/view', 'salaryView')->name('employee.monthly.salary');
         });
     });
 });
