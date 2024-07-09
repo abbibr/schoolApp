@@ -13,6 +13,10 @@ use App\Models\EmployeeAttendance;
 
 class EmployeeAttendanceController extends Controller
 {
+    /* public function __construct() {
+        $this->middleware('auth')->only(['attendanceView', 'attendanceAdd']);
+    } */
+
     public function attendanceView() {
         $datas = EmployeeAttendance::select('date')->groupBy('date')->orderBy('date', 'desc')->get();
 
