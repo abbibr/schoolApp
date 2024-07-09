@@ -248,7 +248,8 @@ Route::middleware('auth')->group(function() {
         });
 
         Route::controller(MonthlySalaryController::class)->group(function() {
-            Route::get('/monthly/salary/view', 'salaryView')->name('employee.monthly.salary');
+            Route::get('/monthly/salary/view', 'monthlyView')->name('employee.monthly.salary');
+            Route::get('/monthly/salary/attendance', 'monthlyAttendance')->name('employee.monthly.attendance');
         });
     });
 });
