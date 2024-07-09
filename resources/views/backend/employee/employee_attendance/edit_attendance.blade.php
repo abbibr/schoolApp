@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col">
 
-                                <form method="post" action="{{ route('employee.attendance.store') }}">
+                                <form method="post" action="{{ route('employee.attendance.update', $edit_employees[0]->date) }}">
                                     @csrf
 
                                     <div class="row">
@@ -63,13 +63,13 @@
                                                             <td>{{ $employee->employee->name }}</td>
                                                             <td colspan="3">
                                                                 <div class="switch-toggle switch-3 switch-candy">
-                                                                    <input name="attend_status{{$key}}" type="radio" id="present{{$key}}" {{ $employee->attend_status == 'present' ? 'checked' : ''}}>
+                                                                    <input name="attend_status{{$key}}" type="radio" id="present{{$key}}" value="present" {{ $employee->attend_status == 'present' ? 'checked' : ''}}>
                                                                         <label for="present{{$key}}">Present</label>
 
-                                                                    <input name="attend_status{{$key}}" type="radio" id="leave{{$key}}" {{ $employee->attend_status == 'leave' ? 'checked' : ''}}>
+                                                                    <input name="attend_status{{$key}}" type="radio" id="leave{{$key}}" value="leave" {{ $employee->attend_status == 'leave' ? 'checked' : ''}}>
                                                                         <label for="leave{{$key}}">Leave</label>
 
-                                                                    <input name="attend_status{{$key}}" type="radio" id="absent{{$key}}" {{ $employee->attend_status == 'absent' ? 'checked' : ''}}>
+                                                                    <input name="attend_status{{$key}}" type="radio" id="absent{{$key}}" value="absent" {{ $employee->attend_status == 'absent' ? 'checked' : ''}}>
                                                                         <label for="absent{{$key}}">Absent</label>
                                                                 </div>
                                                             </td>
@@ -81,7 +81,7 @@
                                     </div>
 
                                     <div class="text-xs-right">
-                                        <input type="submit" class="btn btn-rounded btn-primary" value="Add Attendance">
+                                        <input type="submit" class="btn btn-rounded btn-primary" value="Update Attendance">
                                     </div>
                                 </form>
 

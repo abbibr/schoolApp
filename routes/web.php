@@ -243,6 +243,7 @@ Route::middleware('auth')->group(function() {
             Route::post('/attendance/store', 'attendanceStore')->name('employee.attendance.store');
             Route::get('/attendance/details/{date}', 'attendanceDetails')->name('employee.attendance.details');
             Route::get('/attendance/edit/{date}', 'attendanceEdit')->name('employee.attendance.edit');
+            Route::post('/attendance/update/{date}', 'attendanceUpdate')->name('employee.attendance.update');
         });
     });
 });

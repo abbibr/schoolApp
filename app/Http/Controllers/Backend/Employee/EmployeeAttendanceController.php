@@ -76,4 +76,33 @@ class EmployeeAttendanceController extends Controller
             'edit_employees' => $edit_employees
         ]);
     }
+
+    public function attendanceUpdate($date, Request $request) {
+        $request->validate([
+            'date' => 'date|required'
+        ], 
+        [
+            'date.required' => 'Please enter the Date!'
+        ]);
+
+        $employeesAttendance = EmployeeAttendance::where('date', $date)->get();
+        $employeesId = $request->employee_id;
+
+        foreach ($employeesId as $key => $employeeId) {
+            $attendStatus = 'attend_status'.$key;
+            $employeeAttendance = $employeesAttendance[$key];
+
+            $employeeAttendance->update([
+                'date' => $request->date,
+                'attend_status' => $request->$attendStatus
+            ]);
+        }
+
+        $notification = [
+            'message' => 'Employees` Attendance Successfully Updated',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('employee.attendance.view')->with($notification);
+    }
 }
