@@ -18,8 +18,12 @@ class MonthlySalaryController extends Controller
     }
 
     public function monthlyAttendance(Request $request) {
-        $date = $request->date;
-        $allStudent = EmployeeAttendance::select('user_id')->groupBy('user_id')->with('employee')->where('date', $date)->get();
+        $date = date('Y-m', strtotime($request->date));
+        if($date != '') {
+            $where[] = ['date', 'like', $date.'%'];
+        }
+
+        $allStudent = EmployeeAttendance::select('user_id')->groupBy('user_id')->with('employee')->where($where)->get();
 
         $html['thsource'] = '<th>#</th>';
         $html['thsource'] .= '<th>Employee Name</th>';
@@ -28,26 +32,24 @@ class MonthlySalaryController extends Controller
         $html['thsource'] .= '<th>Action</th>';
 
         foreach ($allStudent as $key => $v) {
-            $totalAttend = EmployeeAttendance::with('employee')->where('date', $date)->where('user_id', $v->user_id)->get();
+            $totalAttend = EmployeeAttendance::with('employee')->where($where)->where('user_id', $v->user_id)->get();
+            $absentCount = count($totalAttend->where('attend_status', 'absent'));
 
-            // $color = 'success';
-            // $html[$key]['tdsource'] = '<td>' . ($key + 1) . '</td>';
-            // $html[$key]['tdsource'] .= '<td>' . $v->student->id_no . '</td>';
-            // $html[$key]['tdsource'] .= '<td>' . $v->student->name . '</td>';
-            // $html[$key]['tdsource'] .= '<td>' . $v->roll . '</td>';
-            // $html[$key]['tdsource'] .= '<td>' . $registrationfee->amount . '</td>';
-            // $html[$key]['tdsource'] .= '<td>' . $v->discount[0]->discount . '%' . '</td>';
+            $color = 'success'; 
+            $html[$key]['tdsource'] = '<td>' . ($key + 1) . '</td>';
+            $html[$key]['tdsource'] .= '<td>' . $v->employee->name . '</td>';
+            $html[$key]['tdsource'] .= '<td>' . number_format($v->employee->salary) . '</td>';
 
-            // $originalfee = $registrationfee->amount;
-            // $discount = $v->discount[0]->discount;
-            // $discounttablefee = $discount / 100 * $originalfee;
-            // $finalfee = (float) $originalfee - (float) $discounttablefee;
+            $salary = (float) $v->employee->salary;
+            $salaryPerDay = (float) $salary / 30;
+            $totalSalaryMinus = (float) $absentCount * $salaryPerDay;
+            $totalSalary = (float) $salary - (float) $totalSalaryMinus;
 
-            // $html[$key]['tdsource'] .= '<td>' . $finalfee . '</td>';
-            // $html[$key]['tdsource'] .= '<td>';
-            // $html[$key]['tdsource'] .= '<a class="btn btn-sm btn-'.$color.'" title="PaySlip" target="_blanks" href="'.route("student.registration.fee.payslip").'?class_id='.$v->class_id.'&student_id='.$v->student_id.'">Student Fee</a>';
-            // $html[$key]['tdsource'] .= '</td>';
+            $html[$key]['tdsource'] .= '<td>' . number_format($totalSalary) . '</td>';
+            $html[$key]['tdsource'] .= '<td>';
+            $html[$key]['tdsource'] .= '<a class="btn btn-sm btn-'.$color.'" title="PaySlip" target="_blanks" href="'.route("employee.monthly.salary.payslip", $v->user_id).'">Employee Monthly Fee</a>';
+            $html[$key]['tdsource'] .= '</td>';
         }
-        // return response()->json(@$html);
+        return response()->json(@$html);
     }
 }

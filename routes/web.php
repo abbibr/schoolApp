@@ -250,6 +250,7 @@ Route::middleware('auth')->group(function() {
         Route::controller(MonthlySalaryController::class)->group(function() {
             Route::get('/monthly/salary/view', 'monthlyView')->name('employee.monthly.salary');
             Route::get('/monthly/salary/attendance', 'monthlyAttendance')->name('employee.monthly.attendance');
+            Route::get('/monthly/salary/payslip/{user_id}', 'monthlyPaySlip')->name('employee.monthly.salary.payslip');
         });
     });
 });
