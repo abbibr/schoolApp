@@ -52,4 +52,24 @@ class MonthlySalaryController extends Controller
         }
         return response()->json(@$html);
     }
+
+    public function monthlyPaySlip($user_id) {
+        $employeeUserId = EmployeeAttendance::where('user_id', $user_id)->first();
+        $date = date('Y-m', strtotime($employeeUserId->date));
+
+        if ($date != '') {
+            $where[] = ['date', 'like', $date.'%'];
+        }
+
+        $details = EmployeeAttendance::with('employee')
+                        ->where('user_id', $employeeUserId->user_id)
+                        ->where($where)
+                        ->get();
+
+        $pdf = PDF::loadView('backend.employee.monthly_salary.pdf_salary', [
+            'details' => $details
+        ]);
+
+        return $pdf->download();
+    }
 }
