@@ -55,7 +55,7 @@
             <tr>
                 <td>2</td>
                 <td>Basic Salary</td>
-                <td>{{ $salary }}</td>
+                <td>{{ number_format($salary) }}</td>
             </tr>
             <tr>
                 <td>3</td>
@@ -70,7 +70,7 @@
             <tr>
                 <td>5</td>
                 <td>Salary This Month</td>
-                <td>{{ $totalSalary }}</td>
+                <td>{{ number_format($totalSalary) }}</td>
             </tr>
         </tbody>
     </table> <br>
