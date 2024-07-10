@@ -66,10 +66,20 @@ class MonthlySalaryController extends Controller
                         ->where($where)
                         ->get();
 
+        $absentCount = count($details->where('attend_status', 'absent'));
+        $salary = (float) $details[0]->employee->salary;
+        $salaryPerDay = (float) $salary / 30;
+        $totalSalaryMinus = (float) $absentCount * $salaryPerDay;
+        $totalSalary = (float) $salary - (float) $totalSalaryMinus;
+
         $pdf = PDF::loadView('backend.employee.monthly_salary.pdf_salary', [
-            'details' => $details
+            'details' => $details,
+            'totalSalary' => $totalSalary,
+            'absentCount' => $absentCount,
+            'salary' => $salary,
+            'date' => $date
         ]);
 
-        return $pdf->download();
+        return $pdf->download($employeeUserId->employee->name."_monthly_salary.pdf");
     }
 }
