@@ -247,6 +247,7 @@ Route::middleware('auth')->group(function() {
             Route::post('/attendance/update/{date}', 'attendanceUpdate')->name('employee.attendance.update');
         });
 
+        // Employee Monthly Salary belongs to Attendance
         Route::controller(MonthlySalaryController::class)->group(function() {
             Route::get('/monthly/salary/view', 'monthlyView')->name('employee.monthly.salary');
             Route::get('/monthly/salary/attendance', 'monthlyAttendance')->name('employee.monthly.attendance');
