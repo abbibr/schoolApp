@@ -172,6 +172,21 @@
                 </ul>
             </li>
 
+            <li class="treeview">
+                <a href="#">
+                    <i data-feather="message-circle"></i>
+                    <span>Marks Management</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'marks.entry.add' ? 'active' : '' }}">
+                        <a href="{{ route('marks.entry.add') }}"><i class="ti-more"></i>Marks Entry</a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="header nav-small-cap">User Interface</li>
 
             <li class="treeview">
