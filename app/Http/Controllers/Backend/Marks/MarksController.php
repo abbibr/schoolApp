@@ -34,7 +34,7 @@ class MarksController extends Controller
 
     public function marksGetSubject(Request $request) {
         $classId = $request->class_id;
-        $allData = AssignSubject::with(["school_subject"])->where('class_id', $classId)->get();
+        $allData = AssignSubject::with("school_subject")->where('class_id', $classId)->get();
 
         return response()->json($allData);
     }

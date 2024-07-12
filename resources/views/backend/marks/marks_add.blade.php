@@ -65,6 +65,23 @@
                                             </div>
                                         </div>
 
+                                        
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <h5>Exam Type</h5>
+                                                <div class="controls">
+                                                    <select name="exam_type_id" id="exam_type_id" class="form-control">
+                                                        <option value="" selected disabled>Select Exam</option>
+
+                                                        @foreach ($exams as $exam)
+                                                            <option value="{{ $exam->id }}">{{ $exam->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-3" style="padding-top: 25px;">
                                             <a id="search" name="search" class="btn btn-primary">Search</a>
                                         </div>
@@ -107,6 +124,7 @@
         </div>
     </div>
 
+    <!-- // for get student subject -->
     <script type="text/javascript">
         $(document).on('click', '#search', function() {
             var year_id = $('#year_id').val();

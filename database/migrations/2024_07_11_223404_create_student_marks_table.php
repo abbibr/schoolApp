@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('year_id')->nullable();
             $table->integer('class_id')->nullable();
             $table->integer('assign_subject_id')->nullable();
+            $table->integer('exam_type_id')->nullable();
             $table->double('marks')->nullable();
             $table->timestamps();
         });
