@@ -262,6 +262,7 @@ Route::middleware('auth')->group(function() {
         Route::controller(MarksController::class)->group(function() {
             Route::get('/entry/add', 'marksAdd')->name('marks.entry.add');
             Route::get('/entry/getSubject', 'marksGetSubject')->name('marks.entry.subject');
+            Route::get('entry/getStudent', 'marksGetStudent')->name('marks.entry.student');
         });
     });
 });
