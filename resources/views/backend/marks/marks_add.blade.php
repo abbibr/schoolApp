@@ -18,7 +18,8 @@
                             </div>
 
                             <div class="box-body">
-                                <form method="get" action="">
+                                <form method="post" action="{{ route('marks.entry.store') }}">
+                                    @csrf
 
                                     <div class="row">
                                         <div class="col-md-3">
@@ -107,6 +108,8 @@
 
                                                 </tbody>
                                             </table>
+
+                                            <button type="submit" class="btn btn-info">Save</button>
                                         </div>
                                     </div>
                                 </form>

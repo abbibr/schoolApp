@@ -49,4 +49,41 @@ class MarksController extends Controller
 
         return response()->json($allData);
     }
+
+    public function storeMarks(Request $request) {
+        $year_id = $request->year_id;
+        $class_id = $request->class_id;
+
+        foreach ($request->student_id as $key => $value) {
+            $id = $request->id_no[$key];
+            $mark = $request->marks[$key];
+
+            if (empty($mark)) {
+                $notification = [
+                    'message' => 'Please Enter the Students` Marks!',
+                    'alert-type' => 'error'
+                ];
+        
+                return back()->with($notification);
+            }
+            else {
+                StudentMarks::create([
+                    'student_id' => $value,
+                    'id_no' => $id,
+                    'year_id' => $year_id,
+                    'class_id' => $class_id,
+                    'assign_subject_id' => $request->assign_subject_id,
+                    'exam_type_id' => $request->exam_type_id,
+                    'marks' => $mark
+                ]);
+            }
+        }
+
+        $notification = [
+            'message' => 'Students` Marks Successfully Inserted',
+            'alert-type' => 'success'
+        ];
+
+        return back()->with($notification);
+    }
 }
